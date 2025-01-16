@@ -2,31 +2,31 @@
 
 ## Table of Contents
 
-1. [Introduction and Motivation](#introduction-and-motivation)  
-   1.1 [Introduction](#introduction)  
-   1.2 [Problem Statement](#problem-statement)  
-   1.3 [Motivation](#motivation)  
-2. [Data Collection](#data-collection)  
-   2.1 [Dataset Overview](#dataset-overview)  
-   2.2 [Data Import](#data-import)  
-3. [Data Inspection and Validation](#data-inspection-and-validation)  
-   3.1 [Initial Inspection](#initial-inspection)  
-   3.2 [Results](#results)  
-4. [Data Filtering](#data-filtering)  
-5. [Data Transformation](#data-transformation)  
-   5.1 [Convert Location IDs to Zone Names](#convert-location-ids-to-zone-names)  
-   5.2 [Time Features](#time-features)  
-   5.3 [Normalization and Feature Engineering](#normalization-and-feature-engineering)  
-6. [Exploratory Data Analysis](#exploratory-data-analysis)  
-   6.1 [Scatter Plots](#scatter-plots)  
-   6.2 [Correlation Matrix](#correlation-matrix)  
-7. [Model Building and Results](#model-building-and-results)  
-   7.1 [Support Vector Machines (SVM)](#support-vector-machines-svm)  
-   7.2 [Ridge Regression](#ridge-regression)  
-   7.3 [Random Forest](#random-forest)  
-   7.4 [Gradient Boosting](#gradient-boosting)  
-8. [Conclusion](#conclusion)  
-9. [References](#references)  
+1. [Introduction and Motivation](#Introduction-and-Motivation)  
+   1.1 [Introduction](#Introduction)  
+   1.2 [Problem Statement](#Problem-Statement)  
+   1.3 [Motivation](#Motivation)  
+2. [Data Collection](#Data-Collection)  
+   2.1 [Dataset Overview](#Dataset-Overview)  
+   2.2 [Data Import](#Data-Import)  
+3. [Data Inspection and Validation](#Data-Inspection-and-Validation)  
+   3.1 [Initial Inspection](#Initial-Inspection)  
+   3.2 [Results](#Results)  
+4. [Data Filtering](#Data-Filtering)  
+5. [Data Transformation](#Data-Transformation)  
+   5.1 [Convert Location IDs to Zone Names](#Convert-Location-IDs-to-Zone-Names)  
+   5.2 [Time Features](#Time-Features)  
+   5.3 [Normalization and Feature Engineering](#Normalization-and-Feature-Engineering)  
+6. [Exploratory Data Analysis](#Exploratory-Data-Analysis)  
+   6.1 [Scatter Plots](#Scatter-Plots)  
+   6.2 [Correlation Matrix](#Correlation-Matrix)  
+7. [Model Building and Results](#Model-Building-and-Results)  
+   7.1 [Support Vector Machines (SVM)](#Support-Vector-Machines-SVM)  
+   7.2 [Ridge Regression](#Ridge-Regression)  
+   7.3 [Random Forest](#Random-Forest)  
+   7.4 [Gradient Boosting](#Gradient-Boosting)  
+8. [Conclusion](#Conclusion)  
+9. [References](#References)  
 
 ---
 
@@ -58,7 +58,7 @@ Enhanced fare prediction models improve operational efficiency and customer sati
 ### 2.1 Dataset Overview
 
 The dataset used for this project is the New York Taxi Trip Data available on Kaggle:  
-[Dataset Link](#)  
+[Dataset Link](https://www.kaggle.com/datasets/microize/newyork-yellow-taxi-trip-data-2020-2019)  
 
 Two files were selected:  
 - `yellow_tripdata_2019_06.csv` (primary data file)  
@@ -171,5 +171,5 @@ This project demonstrates the application of machine learning techniques to pred
 
 ## 9. References
 
-- [New York Taxi Trip Data: Kaggle Dataset](#)  
+- [New York Taxi Trip Data: Kaggle Dataset](https://www.kaggle.com/datasets/microize/newyork-yellow-taxi-trip-data-2020-2019)  
 - [Spark Documentation: Apache Spark](https://spark.apache.org/)
