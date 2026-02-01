@@ -19,49 +19,53 @@ from src.preprocessing import (
 @pytest.fixture
 def sample_raw_df():
     """Create a sample raw dataframe for testing."""
-    return pd.DataFrame({
-        "VendorID": [1, 2, 1],
-        "tpep_pickup_datetime": [
-            "2019-06-01 00:02:40",
-            "2019-06-01 12:30:00",
-            "2019-06-02 18:45:00",
-        ],
-        "tpep_dropoff_datetime": [
-            "2019-06-01 00:18:37",
-            "2019-06-01 12:45:00",
-            "2019-06-02 19:00:00",
-        ],
-        "passenger_count": [1, 2, 3],
-        "trip_distance": [2.0, 5.5, 3.2],
-        "PULocationID": [162, 48, 148],
-        "DOLocationID": [68, 239, 87],
-        "payment_type": [1, 1, 2],
-        "fare_amount": [11.5, 20.0, 15.0],
-        "extra": [3.0, 0.5, 2.5],
-        "mta_tax": [0.5, 0.5, 0.5],
-        "tip_amount": [2.0, 4.0, 0.0],
-        "tolls_amount": [0.0, 0.0, 5.0],
-        "total_amount": [17.3, 25.5, 23.0],
-        "store_and_fwd_flag": ["N", "N", "Y"],
-        "improvement_surcharge": [0.3, 0.3, 0.3],
-        "congestion_surcharge": [2.5, 2.5, 2.5],
-    })
+    return pd.DataFrame(
+        {
+            "VendorID": [1, 2, 1],
+            "tpep_pickup_datetime": [
+                "2019-06-01 00:02:40",
+                "2019-06-01 12:30:00",
+                "2019-06-02 18:45:00",
+            ],
+            "tpep_dropoff_datetime": [
+                "2019-06-01 00:18:37",
+                "2019-06-01 12:45:00",
+                "2019-06-02 19:00:00",
+            ],
+            "passenger_count": [1, 2, 3],
+            "trip_distance": [2.0, 5.5, 3.2],
+            "PULocationID": [162, 48, 148],
+            "DOLocationID": [68, 239, 87],
+            "payment_type": [1, 1, 2],
+            "fare_amount": [11.5, 20.0, 15.0],
+            "extra": [3.0, 0.5, 2.5],
+            "mta_tax": [0.5, 0.5, 0.5],
+            "tip_amount": [2.0, 4.0, 0.0],
+            "tolls_amount": [0.0, 0.0, 5.0],
+            "total_amount": [17.3, 25.5, 23.0],
+            "store_and_fwd_flag": ["N", "N", "Y"],
+            "improvement_surcharge": [0.3, 0.3, 0.3],
+            "congestion_surcharge": [2.5, 2.5, 2.5],
+        }
+    )
 
 
 @pytest.fixture
 def zone_lookup_df():
     """Create a sample zone lookup dataframe."""
-    return pd.DataFrame({
-        "LocationID": [48, 68, 87, 148, 162, 239],
-        "Zone": [
-            "Clinton East",
-            "East Chelsea",
-            "Financial District North",
-            "Lower East Side",
-            "Midtown East",
-            "Upper West Side South",
-        ],
-    })
+    return pd.DataFrame(
+        {
+            "LocationID": [48, 68, 87, 148, 162, 239],
+            "Zone": [
+                "Clinton East",
+                "East Chelsea",
+                "Financial District North",
+                "Lower East Side",
+                "Midtown East",
+                "Upper West Side South",
+            ],
+        }
+    )
 
 
 class TestCleanDataframe:
@@ -131,11 +135,13 @@ class TestMapLocationIds:
 
     def test_handles_unknown_locations(self, zone_lookup_df):
         """Test that unknown location IDs are handled."""
-        df = pd.DataFrame({
-            "PULocationID": [999],
-            "DOLocationID": [888],
-            "trip_distance": [1.0],
-        })
+        df = pd.DataFrame(
+            {
+                "PULocationID": [999],
+                "DOLocationID": [888],
+                "trip_distance": [1.0],
+            }
+        )
         result = map_location_ids(df, zone_lookup_df)
 
         assert result["pickup_location"].iloc[0] == "Unknown"
@@ -189,7 +195,15 @@ class TestCreateCyclicFeatures:
 
     def test_cyclic_values_are_bounded(self):
         """Test that cyclic values are between -1 and 1."""
-        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        days = [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+        ]
         df = pd.DataFrame({"pickup_day_of_week": days})
         result = create_cyclic_features(df)
 
@@ -245,14 +259,18 @@ class TestRemoveOutliers:
     def test_removes_extreme_values(self):
         """Test that extreme values are removed."""
         df = pd.DataFrame({"value": [1, 2, 3, 4, 5, 100]})
-        result = remove_outliers(df, "value", lower_percentile=0.1, upper_percentile=0.9)
+        result = remove_outliers(
+            df, "value", lower_percentile=0.1, upper_percentile=0.9
+        )
 
         assert 100 not in result["value"].values
 
     def test_preserves_normal_values(self):
         """Test that normal values are preserved."""
         df = pd.DataFrame({"value": list(range(1, 101))})
-        result = remove_outliers(df, "value", lower_percentile=0.1, upper_percentile=0.9)
+        result = remove_outliers(
+            df, "value", lower_percentile=0.1, upper_percentile=0.9
+        )
 
         assert len(result) < 100
         assert len(result) > 50

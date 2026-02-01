@@ -79,10 +79,12 @@ def train_svm(
     if c_values is None:
         c_values = [0.5, 1.0]
 
-    pipeline = Pipeline([
-        ("scaler", StandardScaler()),
-        ("svr", SVR(kernel="linear", cache_size=1000)),
-    ])
+    pipeline = Pipeline(
+        [
+            ("scaler", StandardScaler()),
+            ("svr", SVR(kernel="linear", cache_size=1000)),
+        ]
+    )
 
     param_grid = {"svr__C": c_values}
 
@@ -127,10 +129,12 @@ def train_ridge(
     Returns:
         Dictionary with model, predictions, and metrics
     """
-    pipeline = Pipeline([
-        ("scaler", StandardScaler()),
-        ("ridge", Ridge(alpha=alpha)),
-    ])
+    pipeline = Pipeline(
+        [
+            ("scaler", StandardScaler()),
+            ("ridge", Ridge(alpha=alpha)),
+        ]
+    )
 
     pipeline.fit(X_train, y_train)
 
@@ -211,16 +215,21 @@ def train_gbt(
     Returns:
         Dictionary with model, predictions, and metrics
     """
-    pipeline = Pipeline([
-        ("scaler", StandardScaler()),
-        ("gbt", GradientBoostingRegressor(
-            n_estimators=n_estimators,
-            max_depth=max_depth,
-            learning_rate=learning_rate,
-            subsample=0.8,
-            random_state=42,
-        )),
-    ])
+    pipeline = Pipeline(
+        [
+            ("scaler", StandardScaler()),
+            (
+                "gbt",
+                GradientBoostingRegressor(
+                    n_estimators=n_estimators,
+                    max_depth=max_depth,
+                    learning_rate=learning_rate,
+                    subsample=0.8,
+                    random_state=42,
+                ),
+            ),
+        ]
+    )
 
     pipeline.fit(X_train, y_train)
 
@@ -247,10 +256,12 @@ def compare_models(results: Dict[str, Dict]) -> pd.DataFrame:
     """
     comparison = []
     for name, result in results.items():
-        comparison.append({
-            "Model": name,
-            "R2 Score": result["metrics"]["r2"],
-            "RMSE": result["metrics"]["rmse"],
-        })
+        comparison.append(
+            {
+                "Model": name,
+                "R2 Score": result["metrics"]["r2"],
+                "RMSE": result["metrics"]["rmse"],
+            }
+        )
 
     return pd.DataFrame(comparison).sort_values("R2 Score", ascending=False)

@@ -33,11 +33,13 @@ def sample_data():
 @pytest.fixture
 def sample_df():
     """Create sample DataFrame for feature preparation."""
-    return pd.DataFrame({
-        "feature1": [1.0, 2.0, 3.0],
-        "feature2": [4.0, 5.0, 6.0],
-        "total_amount": [10.0, 20.0, 30.0],
-    })
+    return pd.DataFrame(
+        {
+            "feature1": [1.0, 2.0, 3.0],
+            "feature2": [4.0, 5.0, 6.0],
+            "total_amount": [10.0, 20.0, 30.0],
+        }
+    )
 
 
 class TestPrepareFeatures:
