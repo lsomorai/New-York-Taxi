@@ -1,16 +1,16 @@
 """Machine learning models for NYC Taxi Fare Prediction."""
 
-from typing import Dict, Tuple, Any
+from typing import Any, Dict, Tuple
 
 import numpy as np
 import pandas as pd
-from sklearn.svm import SVR
+from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import Ridge
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
+from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import GridSearchCV, cross_val_score
-from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVR
 
 
 def prepare_features(
